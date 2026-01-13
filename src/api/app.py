@@ -11,9 +11,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from agents.multi_agent_coordinator import MultiAgentCoordinator
 
+# Get the base directory (StockSage root)
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+
 app = Flask(__name__, 
-            template_folder='../templates',
-            static_folder='../static')
+            template_folder=os.path.join(base_dir, 'templates'),
+            static_folder=os.path.join(base_dir, 'static'))
 
 # Initialize the multi-agent coordinator
 coordinator = MultiAgentCoordinator()
