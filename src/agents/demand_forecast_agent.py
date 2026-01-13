@@ -55,6 +55,8 @@ class DemandForecastAgent(BaseAgent):
             trend = 0
         
         # Generate forecast
+        # Set seed for reproducibility in production
+        np.random.seed(42)
         self.forecast = []
         for i in range(forecast_days):
             # Add some randomness to simulate real-world variation

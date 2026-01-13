@@ -243,7 +243,7 @@ function displayAgentExplanations(results) {
 }
 
 // Tab switching function
-function showTab(tabName) {
+function showTab(tabName, event) {
     // Hide all tabs
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
@@ -258,5 +258,7 @@ function showTab(tabName) {
     document.getElementById(tabName + 'Tab').classList.add('active');
     
     // Activate corresponding button
-    event.target.classList.add('active');
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
 }

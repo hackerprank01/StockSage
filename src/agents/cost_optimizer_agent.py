@@ -70,8 +70,10 @@ class CostOptimizerAgent(BaseAgent):
         
         # Recommendations
         if abs(reorder_quantity - eoq) / eoq > 0.2:  # More than 20% difference
-            cost_savings = abs(self.total_cost - (annual_ordering_cost + (eoq/2 * holding_cost_per_unit)))
-            recommendation = f"Consider adjusting order quantity to {round(eoq)} units for optimal costs"
+            # Calculate potential cost savings
+            optimal_cost = (annual_demand / eoq * order_cost) + (eoq / 2 * holding_cost_per_unit)
+            cost_savings = abs(self.total_cost - optimal_cost)
+            recommendation = f"Consider adjusting order quantity to {round(eoq)} units for optimal costs (potential savings: ${cost_savings:.2f}/year)"
         else:
             recommendation = "Current order quantity is near optimal"
         
