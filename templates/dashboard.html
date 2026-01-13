@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSage - AI Inventory Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 StockSage</h1>
+            <p class="subtitle">AI-Powered Inventory Management System</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Input Form Section -->
+            <div class="card input-section">
+                <h2>📊 Simulation Parameters</h2>
+                
+                <form id="simulationForm">
+                    <div class="form-group">
+                        <label for="productName">Product Name:</label>
+                        <input type="text" id="productName" name="product_name" value="Widget A" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currentStock">Current Stock Level:</label>
+                        <input type="number" id="currentStock" name="current_stock" value="45" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="salesHistory">Sales History (comma-separated daily sales):</label>
+                        <textarea id="salesHistory" name="sales_history" rows="3" required>12,15,13,18,14,16,12,19,15,17,14,20,16,18,15,13,17,19,14,16,18,15,17,20,16,14,19,15,18,16</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="supplierName">Supplier Name:</label>
+                        <input type="text" id="supplierName" name="supplier_name" value="GlobalTech Supplies" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="leadTimeHistory">Lead Time History (comma-separated days):</label>
+                        <textarea id="leadTimeHistory" name="lead_time_history" rows="2">7,8,6,7,9,7,8,6,7,8</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="unitCost">Unit Cost ($):</label>
+                            <input type="number" id="unitCost" name="unit_cost" value="25.00" step="0.01" min="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="orderCost">Order Cost ($):</label>
+                            <input type="number" id="orderCost" name="order_cost" value="100.00" step="0.01" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="holdingCostRate">Holding Cost Rate (%):</label>
+                            <input type="number" id="holdingCostRate" name="holding_cost_rate" value="20" step="1" min="0" max="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stockoutCost">Stockout Cost ($ per unit):</label>
+                            <input type="number" id="stockoutCost" name="stockout_cost" value="75.00" step="0.01" min="0" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Run Simulation</button>
+                </form>
+
+                <div id="loadingIndicator" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Running AI simulation...</p>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="card results-section" style="display: none;">
+                <h2>🎯 AI Recommendations</h2>
+                
+                <div id="summarySection" class="summary-box"></div>
+
+                <div id="recommendationsSection" class="recommendations-box"></div>
+
+                <div class="tabs">
+                    <button class="tab-button active" onclick="showTab('demand')">Demand Forecast</button>
+                    <button class="tab-button" onclick="showTab('inventory')">Inventory Optimization</button>
+                    <button class="tab-button" onclick="showTab('supplier')">Supplier Analysis</button>
+                    <button class="tab-button" onclick="showTab('cost')">Cost Optimization</button>
+                </div>
+
+                <div id="demandTab" class="tab-content active"></div>
+                <div id="inventoryTab" class="tab-content"></div>
+                <div id="supplierTab" class="tab-content"></div>
+                <div id="costTab" class="tab-content"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>StockSage - Multi-Agent AI for Inventory Management | &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
